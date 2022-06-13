@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Basketball Game</title>
+		<style src="stylesheet" href="'style.css"></style>
+		<link rel="icon" href="./assets/logo.png">
+		<script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+		<script src="ar-components.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+	</head>
+	<body class="inline">
+		<a-scene webxr="optionalFeatures: hit-test, dom-overlay; overlayElement:#overlay;" physics="debug: false">
+			<a-sound src="./assets/theme.mp3" autoplay="true" loop="true" volume="0.3"></a-sound>
+			<a-sphere id="ball" dynamic-body radius="0.1" color="orange" position="0.1 2.36 -1.5"></a-sphere>
+			<a-entity id="hoop" rotation="90 0 0" position="0 2 -1.8" hide-in-ar-mode> 
+				<a-torus scale="0.6 0.6 0.6" position="0 0.173 -0.1" color="#43A367" radius="0.25" radius-tubular="0.005"></a-torus>
+				<a-torus scale="0.6 0.6 0.6" static-body="shape: mesh;" position="0 0.173 -0.1" visible="false" radius="0.27" radius-tubular="0.02" material="" geometry="radius: 0.29; segmentsRadial: 5; segmentsTubular: 12"></a-torus>
+				<a-plane
+					scale="0.6 0.6 0.6"
+					position="0 0 -0.3"
+					rotation="-90 0 0"
+					width="0.9"
+					height="0.9"
+					material="transparent: true; side: double;"
+					src="./backboard.png"
+					static-body
+				></a-plane>
+				<a-plane scale="0.6 0.6 0.6" position="0 0 1.12355" rotation="-90 0 0" width="2" height="3" static-body geometry="height: 4.37" visible="false"></a-plane>
+				<a-cone scale="0.6 0.6 0.6" position="0 0.173 -0.010" color="tomato" radius-bottom="0.25" radius-top="0.3" material="side: double; opacity:0.5; transparent: true;" geometry="height: 0.29; openEnded: true" rotation="90 0 0"></a-cone>
+			</a-entity>
+			<a-entity ar-hit-test="doHitTest:false" visible="false">
+				<a-plane
+					rotation="-90 0 0"
+					width="0.2"
+					height="0.2"
+					src="./arrow.png"
+					material="transparent:true;"
+				></a-plane>
+			</a-entity>
+			<a-sky src="./assets/space.jpg" radius="40" repeat="6 4"></a-sky>
+			<a-plane
+				rotation="-90 0 0"
+				width="85"
+				height="85"
+				depth="1"
+				repeat="50 50"
+				color="#ffffff"
+				src="./assets/floor.png"
+				static-body
+				hide-in-ar-mode
+			></a-plane>
+			<a-camera>
+				<a-entity
+					id="text"
+					text="value: Hello World; align: left; width: 0.1;"
+					position="0 0 -0.17;"
+					visible="false"
+				>
+				</a-entity>
+			</a-camera>
+		</a-scene>
+		<div id="overlay" class="container">
+			<div id="ar-instructions">
+				<h1>Welcome To Basketball</h1>
+				<section class="overlay-content">
+					<p id="instructions">Place the basket along a wall</p>
+				</section>
+				<div style="display: flex; justify-content: space-between; align-self: stretch;">
+					<button id="go-button">Ready to Play!</button>
+					<button id="exit-button">Stop AR</button>
+				</div>
+			</div>
+			<div id="inline-instructions">
+				<h1>Welcome To Basketball</h1>
+				<section class="overlay-content">
+					<p>Enter AR to Start Playing</p>
+				</section>
+			</div>
+		</div>
+		<script src="index.js">
+		</script>
+	</body>
+</html>
